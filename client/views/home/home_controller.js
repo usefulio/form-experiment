@@ -16,7 +16,8 @@ HomeController = RouteController.extend({
 		/*WAIT_FUNCTION*/
 	},
 	data: function() {
-		return { 
+		return {
+			name: "Joe."
 		};
 		/*DATA_FUNCTION*/
 	}
