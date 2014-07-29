@@ -207,6 +207,11 @@ Template.Form.events({
 
 Template.FormGroup.helpers({
 	"formInput": function() {
+
+		if (this.field.template) {
+			return Template[this.field.template];
+		}
+
 		if(this.field.control == "input") {
 			return Template.FormInput;			
 		}
