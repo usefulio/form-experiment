@@ -1,0 +1,75 @@
+<template name="Form">
+	{{#with description}}
+		<form role="form" id="{{id}}">
+			{{#each fields}}
+				{{> FormGroup field=this description=..}}
+			{{/each}}
+
+			{{#if hasButtons}}
+				<div class="form-group">
+					{{#if submitButton}}
+						<button type="submit" class="btn btn-success">{{submitButton}}</button>
+					{{/if}}
+
+					{{#if cancelButton}}
+						<button type="button" class="btn btn-default cancel-button">{{cancelButton}}</button>
+					{{/if}}
+				</div>
+			{{/if}}
+		</form>
+	{{/with}}
+</template>
+
+<template name="FormGroup">
+	<div class="form-group {{errorClass}}">
+		<label class="control-label">{{field.title}}</label>
+		{{> formInput data=this.description.data field=this.field}}
+		<span class="help-block"></span>
+	</div>
+</template>
+
+<template name="FormInput">
+	<input type="{{inputType}}" name="{{field.name}}" value="{{value}}" {{autofocus}} class="form-control">
+</template>
+
+<template name="FormTextArea">
+	<textarea name="{{field.name}}" {{autofocus}} class="form-control">{{value}}</textarea>
+</template>
+
+<template name="FormSelect">
+	<select class="form-control" {{autofocus}} name="{{field.name}}">
+		{{#each field.items}}
+			<option value="{{value}}" {{selected ..}}>{{title}}</option>
+		{{/each}}
+	</select>
+</template>
+
+<template name="FormSelectMulti">
+	<select class="form-control" name="{{field.name}}" {{autofocus}} multiple>
+		{{#each field.items}}
+			<option value="{{value}}" {{selected ..}}>{{title}}</option>
+		{{/each}}
+	</select>
+</template>
+
+<template name="FormCheckbox">
+	{{#each field.items}}
+		<div class="checkbox">
+			<label>
+				<input type="checkbox" value="{{value}}" name="{{../field.name}}" {{checked ..}}>
+				{{title}}
+			</label>
+		</div>		
+	{{/each}}
+</template>
+
+<template name="FormRadio">
+	{{#each field.items}}
+		<div class="radio">
+			<label>
+				<input type="radio" value="{{value}}" name="{{../field.name}}" {{checked ..}}>
+				{{title}}
+			</label>
+		</div>		
+	{{/each}}
+</template>
